@@ -1,0 +1,51 @@
+🧠 Scrambled — HTB Machine Walkthrough
+
+Difficulty: Medium
+OS: Windows
+Type: Active Directory / Kerberos Abuse
+
+📝 Overview
+
+Scrambled is a retired Hack The Box machine that demonstrates classic Active Directory attack techniques with a focus on Kerberos authentication abuse. The objective is to gain an initial foothold through web enumeration, leverage Kerberos to escalate privileges, and finally obtain SYSTEM access.
+
+🛠️ Attack Summary
+
+Service Enumeration
+• Identify a web application running on the target.
+• Perform thorough enumeration to discover credentials or login vectors.
+
+Initial Access
+• Find valid credentials for a low-privileged user (e.g., ksimpson).
+• NTLM is disabled — Kerberos is enforced, driving the use of Kerberos-centric attacks.
+
+Kerberoasting
+• Enumerate accounts with Service Principal Names (SPNs).
+• Extract the Kerberos ticket for a service account (e.g., SqlSvc).
+• Crack the ticket offline to recover the plaintext service account password.
+
+Abuse Service Account
+• Use the cracked credentials to authenticate to services such as MSSQL.
+• Generate a Silver Ticket to impersonate elevated users where appropriate.
+
+Lateral Movement & Privilege Escalation
+• Leverage access to find additional credentials (e.g., MiscSvc).
+• Use PowerShell Remoting or equivalent to achieve code execution as the new user.
+
+Privilege Escalation to SYSTEM
+• Analyze the environment for misconfigurations or insecure application usage.
+• Identify a .NET application using insecure deserialization (BinaryFormatter).
+• Craft a gadget chain to execute arbitrary code as SYSTEM.
+
+🧾 Key Concepts Covered
+
+Web application enumeration
+
+Kerberos authentication fundamentals
+
+Kerberoasting SPNs
+
+Silver Ticket abuse
+
+MSSQL authentication and exploitation
+
+Insecure deserialization in .NET
