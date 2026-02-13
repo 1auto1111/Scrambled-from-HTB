@@ -1,4 +1,4 @@
-<img width="887" height="642" alt="Pasted image 20260213050028" src="https://github.com/user-attachments/assets/f4249e53-3d23-47ca-a859-7e88fa4c21be" />Starting of with nmap, we get 14 ports open:
+Starting off with nmap, we get 14 ports open:
 
 ```sql
 Nmap scan report for 10.129.249.66
