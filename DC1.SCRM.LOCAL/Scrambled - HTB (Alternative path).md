@@ -1,5 +1,6 @@
 Starting off with nmap, we get 14 ports open:
 
+
 ```sql
 Nmap scan report for 10.129.249.66
 Host is up (0.70s latency).
