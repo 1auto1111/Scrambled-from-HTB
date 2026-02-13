@@ -1,4 +1,4 @@
-Starting of with nmap, we get 14 ports open:
+<img width="887" height="642" alt="Pasted image 20260213050028" src="https://github.com/user-attachments/assets/f4249e53-3d23-47ca-a859-7e88fa4c21be" />Starting of with nmap, we get 14 ports open:
 
 ```sql
 Nmap scan report for 10.129.249.66
@@ -99,42 +99,49 @@ So firstly we need to add 10.129.249.66 to our hosts files as DC1.scrm.local scr
 ``sudo echo '10.129.249.66 DC1.scrm.local scrm.local scrm DC1' >> /etc/hosts``
 
 Usually, i like to start of with checking http (port 80) if open, which in this case is open and we see this :
-![[Pasted image 20260213045730.png]]
+
+<img width="1267" height="643" alt="Pasted image 20260213045730" src="https://github.com/user-attachments/assets/e814efda-7e09-4445-84ec-9a9abc6a5356" />
+
 
 The Reports tab is the same page as this, so we are going to move on with 'IT Services':
 
-![[Pasted image 20260213045830.png]]
+<img width="968" height="551" alt="Pasted image 20260213045830" src="https://github.com/user-attachments/assets/33b2eb35-5cb4-470b-9ec9-fbdf30720657" />
 
 We see a message about NTLM being disabled due to a security breach, which means we are going to be authenticating againist kerberos, going into the resources links we see : 
 
 Link 1:
-![[Pasted image 20260213050028.png]]
+
+<img width="887" height="642" alt="Pasted image 20260213050028" src="https://github.com/user-attachments/assets/cc1c847d-394a-4107-ae2c-a4d36612b1a2" />
 
 Take note of a possible user : ksimpson and user : support
 
 Link 2 is about  creating a new user account, which doesn't really do anything since the website is static mostly.
 
-![[Pasted image 20260213050210.png]]
+<img width="851" height="645" alt="Pasted image 20260213050210" src="https://github.com/user-attachments/assets/d21a9ce2-7e76-4a3d-9b5e-0810443cd0e4" />
 
 Link 3 is about reporting a problem through an app that we might use later on 
 
 Link 4 
-![[Pasted image 20260213050333.png]]
+
+<img width="825" height="347" alt="Pasted image 20260213050333" src="https://github.com/user-attachments/assets/01f1d410-bae2-4d10-8b29-672c5a33a0a0" />
 
 This is very interseting, this means we can try ksimpson as user and pass and it might work:
 
-![[Pasted image 20260213050612.png]]
+<img width="1081" height="73" alt="Pasted image 20260213050612" src="https://github.com/user-attachments/assets/961d92f3-c156-4816-8eea-659c5cca35ad" />
 
 We authenticated, now let's try enumerating this Domain using these creds:
-![[Pasted image 20260213051036.png]]
-![[Pasted image 20260213051053.png]]
+
+<img width="1256" height="392" alt="Pasted image 20260213051036" src="https://github.com/user-attachments/assets/df7a0f37-3d07-471a-9831-7fa959ea3b8b" />
+<img width="1246" height="105" alt="Pasted image 20260213051053" src="https://github.com/user-attachments/assets/7ece54cd-ff99-4f77-879f-7351469430d4" />
 
 let's keep the users in a users.txt incase we need them for something (no users have the same password as there username)
 
-![[Pasted image 20260213051216.png]]
+<img width="1263" height="512" alt="Pasted image 20260213051216" src="https://github.com/user-attachments/assets/6b813ab7-a506-4eae-92e9-1b04dd680b53" />
 
 As part of enumeration, we see that we can request sqlsvc's hash to crack, this hash is mode 13100 in hashcat, so let's try to crack it:
-![[Pasted image 20260213051309.png]]
+
+<img width="852" height="428" alt="Pasted image 20260213051309" src="https://github.com/user-attachments/assets/fda5af24-3963-4843-91d7-c045425ed0ec" />
+
 We get sqlsvc's password, which is crucial since we can request for alot of stuff now, but first, let's put them in a safe creds file :
 
 ```python
@@ -234,14 +241,16 @@ so now that we have the sid, we can work on convertting  'Pegasus60' to NT, and 
 https://www.browserling.com/tools/ntlm-hash
 
 now we enter the password;
-![[Pasted image 20260213054504.png]]
+
+<img width="852" height="428" alt="Pasted image 20260213051309" src="https://github.com/user-attachments/assets/95d1001c-23b0-480f-be6f-ecc75575a735" />
 
 Pressing on 'Calculate NTLM Hash' gives the hash:
-![[Pasted image 20260213054538.png]]
+
+<img width="483" height="466" alt="Pasted image 20260213054538" src="https://github.com/user-attachments/assets/ca5d7ffb-311c-4268-a274-004d10ab1c01" />
 
 NOW, AN IMPORTANT NOTE, NT hashes are not recommended if UPPERCASE, so we will need to make the hash lowercase from cyberchef and draging the lowercase into the decryption (Thhis doesn't necessarily need to be done by cyberchef):
 
-![[Pasted image 20260213054849.png]]
+<img width="1027" height="379" alt="Pasted image 20260213054849" src="https://github.com/user-attachments/assets/8163c874-d651-49e5-83b6-4837c62c2dac" />
 
 now we can request the ticket with now problems (hopefully):
 ```r
@@ -265,7 +274,7 @@ Impacket v0.14.0.dev0 - Copyright Fortra, LLC and its affiliated companies
 
 we got the administrator ccache file, now we first need to export then we can auth as admin into mssql:
 
-![[Pasted image 20260213055055.png]]
+<img width="659" height="404" alt="Pasted image 20260213055055" src="https://github.com/user-attachments/assets/72f9f705-f81c-4c85-963c-e0cf907d4484" />
 
 now we should enable_xp_cmdshell, since it's not ON automaticlly:
 
