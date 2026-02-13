@@ -119,7 +119,7 @@ Link 2 is about  creating a new user account, which doesn't really do anything s
 
 <img width="851" height="645" alt="Pasted image 20260213050210" src="https://github.com/user-attachments/assets/d21a9ce2-7e76-4a3d-9b5e-0810443cd0e4" />
 
-Link 3 is about reporting a problem through an app that we might use later on 
+Link 3 is about reporting a problem through an app (not the path i m going to cover)
 
 Link 4 
 
