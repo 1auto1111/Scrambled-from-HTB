@@ -477,8 +477,6 @@ cd Desktop
 
 C:\Users\miscsvc\Desktop>type user.txt
 type user.txt
-5fa20<SNIP>
-
-C:\Users\miscsvc\Desktop>whoami /all   
+5fa20<SNIP> 
 ```
 
