@@ -157,7 +157,7 @@ So now we get to what maybe a new concept for alot of beginners, Forging Silver 
 Silver tickets are mainly for service accounts, which in this case is sqlsvc, this will allow us to access MSSQL later on since we can't login with privileges if we don't create it. NOW, if it is done from impacket-getTGT , it's going to get authenticated from the DC, but if it is done but impacket-ticketer, we will need to convert the password to NT hash to forge a ticket of any user WITHOUT contacting the DC.
 So Ticketer basicly fakes a ticket using the nt hash mainly.
 
-Now that u have a basic idea, let's try forging using TGT (whcih is authenticated by the DC) and then try ticketer (which the fake ticket):
+Now that u have a basic idea, let's try forging using TGT (which is authenticated by the DC) and then try ticketer (which is the fake ticket):
 
 ```python
 ┌──(kali㉿kali)-[~/Desktop/htb/Scrambled2]
